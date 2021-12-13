@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<h1>Profile Details</h1>
+
+<div class="card mx-1 card text-white bg-info mb-3" style="width: 18rem;">
+    <div class="card-body card-subtitle mb-2 text-white">
+        <ul>
+            <li> {{profile.user.username}}
+            </li>
+            <li> {{profile.user.first_name}}
+            </li>
+            <li> {{profile.user.last_name}}
+            </li>
+            <li> {{profile.user.email}}
+            </li>
+        </ul>
+
+    </div>
+</div>
+<h1>My Cards</h1>
+<div class="row">
+
+    {% for card in profile.deck.all%}
+    <div class="card mx-1 card text-white bg-secondary mb-3" style="width: 18rem;">
+        <div class="card-body card-subtitle mb-2 text-white">
+            <h5 class="card-title card-subtitle mb-2 text-white">{{card.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-white">{{card.get_position_display}}</h6>
+            {% if user.profile == profile %}
+            <a href="{% url 'newtrade' card.id %}" class=" btn btn-success">Trade</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

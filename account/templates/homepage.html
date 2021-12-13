@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for trade in trade_list %}
+    <div class="card mx-1 card text-white bg-secondary mb-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ trade.card.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-white">Position: {{ trade.card.get_position_display }} </h6>
+            <h6 class="card-subtitle mb-2 text-white"> Offered by : {% if user == trade.profile.user %} You
+                {% else %}
+                {{ trade.profile.user }}
+                {% endif %} </h6>
+            <p class="card-text"></p>
+            <a href="{% url 'trade' trade.id %}" class="card-link">Trade Details</a>
+            {% if trade.profile.user != user %}
+            <a href="{% url 'offertrade' trade.id %}" class="card-link">Make an Offer</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

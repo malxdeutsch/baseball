@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button> Offer </button>
+</form>
+
+{% endblock %}
